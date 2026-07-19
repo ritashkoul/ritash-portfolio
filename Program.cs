@@ -1,4 +1,5 @@
 using System.Threading.RateLimiting;
+using Microsoft.AspNetCore.HttpOverrides;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,10 +16,19 @@ builder.WebHost.ConfigureKestrel(options =>
     options.Limits.RequestHeadersTimeout = TimeSpan.FromSeconds(10);
 });
 
-builder.Services.AddRazorPages(options =>
+builder.Services.Configure<ForwardedHeadersOptions>(options =>
 {
-    options.Conventions.ConfigureFilter(new Microsoft.AspNetCore.Mvc.RequireHttpsAttribute());
+    options.ForwardedHeaders =
+        ForwardedHeaders.XForwardedFor |
+        ForwardedHeaders.XForwardedProto;
 });
+
+//builder.Services.AddRazorPages(options =>
+//{
+//    options.Conventions.ConfigureFilter(new Microsoft.AspNetCore.Mvc.RequireHttpsAttribute());
+//});
+
+builder.Services.AddRazorPages();
 
 // ---------------------------------------------------------------------
 // OWASP A04:2021 (Insecure Design) - rate limit every request so a single
@@ -44,6 +54,8 @@ builder.Services.AddRateLimiter(options =>
 builder.Services.AddResponseCompression();
 
 var app = builder.Build();
+
+app.UseForwardedHeaders();
 
 // ---------------------------------------------------------------------
 // OWASP A05:2021 - generic error handling, never leak stack traces
@@ -109,4 +121,4 @@ app.UseStaticFiles(new StaticFileOptions
 app.UseRouting();
 app.MapRazorPages();
 
-await app.RunAsync();
+app.Run();
