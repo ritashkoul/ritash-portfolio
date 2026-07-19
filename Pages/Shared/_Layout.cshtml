@@ -11,7 +11,15 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>@ViewData["Title"] · Ritash Koul</title>
-    <meta name="description" content="Portfolio of an ASP.NET Core developer." />
+    <meta name="description" content="Ritash Koul — Senior Software Developer with 10+ years building web and desktop applications on ASP.NET Core, WPF, and C#." />
+
+    <!-- Open Graph / social link previews (LinkedIn, WhatsApp, Slack, etc.) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Ritash Koul — Senior Software Developer" />
+    <meta property="og:description" content="10+ years building web and desktop applications on ASP.NET Core, WPF, and C#." />
+    <meta property="og:url" content="https://ritashkoul-dev.onrender.com/" />
+    <meta property="og:site_name" content="Ritash Koul" />
+
     <meta name="theme-color" id="theme-color-meta" content="#171b20" />
     <link rel="icon" type="image/svg+xml" href="~/favicon.svg" />
     <script src="~/js/theme-init.js" asp-append-version="true"></script>
@@ -30,15 +38,15 @@
             <nav class="tabs" aria-label="Main navigation">
                 <a class="@TabClass("/")" href="/">
                     <svg class="icon" aria-hidden="true"><use href="#icon-eye"></use></svg>
-                    <span>About</span>
+                    <span>About.cshtml</span>
                 </a>
                 <a class="@TabClass("/Experience")" href="/Experience">
                     <svg class="icon" aria-hidden="true"><use href="#icon-code"></use></svg>
-                    <span>Experience</span>
+                    <span>Experience.cshtml</span>
                 </a>
                 <a class="@TabClass("/Resume")" href="/Resume">
                     <svg class="icon" aria-hidden="true"><use href="#icon-download"></use></svg>
-                    <span>Resume</span>
+                    <span>Resume.pdf</span>
                 </a>
             </nav>
 
@@ -59,18 +67,14 @@
 
         <footer class="status-bar" role="contentinfo">
             <div class="status-right social-links">
-                <a href="https://www.linkedin.com/in/ritash-koul-a7ab9050/" target="_blank" rel="noopener noreferrer">
-                    <svg class="icon icon-sm" aria-hidden="true">
-                        <use href="#icon-linkedin"></use>
-                    </svg>
-                    LinkedIn
+                <a href="https://www.linkedin.com/in/ritash-koul-a7ab9050" target="_blank" rel="noopener noreferrer">
+                    <svg class="icon icon-sm" aria-hidden="true"><use href="#icon-linkedin"></use></svg> LinkedIn
                 </a>
-
-                <a href="https://www.instagram.com/koulheadedritesh" target="_blank" rel="noopener noreferrer">
-                    <svg class="icon icon-sm" aria-hidden="true">
-                        <use href="#icon-instagram"></use>
-                    </svg>
-                    Instagram
+                <a href="https://www.instagram.com/koulheadedritesh/" target="_blank" rel="noopener noreferrer">
+                    <svg class="icon icon-sm" aria-hidden="true"><use href="#icon-instagram"></use></svg> Instagram
+                </a>
+                <a href="mailto:riteshkoul30sep@gmail.com">
+                    <svg class="icon icon-sm" aria-hidden="true"><use href="#icon-mail"></use></svg> Email
                 </a>
             </div>
         </footer>

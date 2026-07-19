@@ -1,5 +1,6 @@
 using System.Threading.RateLimiting;
 using Microsoft.AspNetCore.HttpOverrides;
+using Portfolio.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,12 +24,18 @@ builder.Services.Configure<ForwardedHeadersOptions>(options =>
         ForwardedHeaders.XForwardedProto;
 });
 
-//builder.Services.AddRazorPages(options =>
-//{
-//    options.Conventions.ConfigureFilter(new Microsoft.AspNetCore.Mvc.RequireHttpsAttribute());
-//});
-
 builder.Services.AddRazorPages();
+
+// ---------------------------------------------------------------------
+// Daily quote (About page). Fetched server-side, not from the browser -
+// the visitor's browser never talks to ZenQuotes directly, so the strict
+// CSP (default-src 'self') needs no new exceptions for this. The request
+// URL is hardcoded, never built from user input, so this isn't an SSRF
+// surface (OWASP A10:2021) despite being an outbound call.
+// ---------------------------------------------------------------------
+builder.Services.AddHttpClient();
+builder.Services.AddMemoryCache();
+builder.Services.AddScoped<IQuoteService, QuoteService>();
 
 // ---------------------------------------------------------------------
 // OWASP A04:2021 (Insecure Design) - rate limit every request so a single
@@ -71,8 +78,6 @@ else
 }
 
 app.UseStatusCodePagesWithReExecute("/Error", "?code={0}");
-
-//app.UseHttpsRedirection();
 
 // ---------------------------------------------------------------------
 // OWASP A05:2021 / A03:2021 (XSS) - a strict, explicit security header set.

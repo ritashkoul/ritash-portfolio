@@ -4,12 +4,12 @@
     ViewData["Title"] = "About";
 }
 
-<span class="eyebrow"><svg class="icon icon-sm" aria-hidden="true"><use href="#icon-eye"></use></svg> // about-me.cs</span>
+<span class="eyebrow"><svg class="icon icon-sm" aria-hidden="true"><use href="#icon-eye"></use></svg> // about</span>
 
 <pre class="hero-code"><span class="tok-keyword">public</span> <span class="tok-keyword">sealed</span> <span class="tok-keyword">class</span> <span class="tok-type">Developer</span> : <span class="tok-type">Person</span>
 {
-    <span class="tok-keyword">public</span> <span class="tok-type">string</span> <span class="tok-method">Name</span>    => <span class="tok-string">"Ritash Koul"</span>;
-    <span class="tok-keyword">public</span> <span class="tok-type">string</span> <span class="tok-method">Role</span>    => <span class="tok-string">"Senior Software Developer"</span>;
+    <span class="tok-keyword">public</span> <span class="tok-type">string</span> <span class="tok-method">Name</span> => <span class="tok-string">"Ritash Koul"</span>;
+    <span class="tok-keyword">public</span> <span class="tok-type">string</span> <span class="tok-method">Role</span> => <span class="tok-string">"Senior Software Developer"</span>;
     <span class="tok-keyword">public</span> <span class="tok-type">string</span> <span class="tok-method">Location</span> => <span class="tok-string">"Pune, Maharashtra, India"</span>;
     <span class="tok-keyword">public</span> <span class="tok-type">int</span> <span class="tok-method">YearsExperience</span> => <span class="tok-string">10</span>;<span class="caret"></span>
 }</pre>
@@ -19,7 +19,8 @@
     applications on the <strong>.NET</strong> stack — C#, WPF, ASP.NET / ASP.NET Core,
     WCF, and REST APIs, backed by SQL Server. I've worked across the full lifecycle:
     requirement gathering, architecture, hands-on development, and leading small teams
-    through delivery. Currently working on the ESRI's ArcGIS Pro platform.
+    through delivery. Currently leading development on a GIS-based town planning tool,
+    integrating with Esri's ArcGIS Pro platform.
 </p>
 
 <div class="button-row">
@@ -27,14 +28,15 @@
         <svg class="icon" aria-hidden="true"><use href="#icon-download"></use></svg> View / download résumé
     </a>
     <a class="btn" href="/Experience">
-        View full experience <svg class="icon" aria-hidden="true"><use href="#icon-arrow-right"></use></svg>
+        View full experience
+        <svg class="icon" aria-hidden="true"><use href="#icon-arrow-right"></use></svg>
     </a>
 </div>
 
 <div class="using-block">
     <div>// find me elsewhere</div>
     <div class="chip-row">
-        <a class="chip" href="https://www.linkedin.com/in/ritash-koul-a7ab9050/" target="_blank" rel="noopener noreferrer">
+        <a class="chip" href="https://www.linkedin.com/in/ritash-koul-a7ab9050" target="_blank" rel="noopener noreferrer">
             <svg class="icon icon-sm" aria-hidden="true"><use href="#icon-linkedin"></use></svg> LinkedIn
         </a>
         <a class="chip" href="https://www.instagram.com/koulheadedritesh/" target="_blank" rel="noopener noreferrer">
@@ -47,14 +49,14 @@
 </div>
 
 <div class="using-block">
-    <div>// skills.csproj</div>
+    <div>// skills</div>
     <div class="chip-row">
         <span class="chip">C#</span>
         <span class="chip">.NET Framework</span>
         <span class="chip">.NET Core</span>
         <span class="chip">WPF / MVVM</span>
         <span class="chip">ASP.NET / ASP.NET Core</span>
-        <span class="chip">ArcGIS Pro</span>
+        <span class="chip">WCF</span>
         <span class="chip">Web APIs</span>
         <span class="chip">T-SQL</span>
         <span class="chip">SQL Server</span>
@@ -75,3 +77,11 @@
         University of Mumbai (2014)
     </p>
 </section>
+
+<blockquote class="quote-of-day section">
+    <p>&ldquo;@Model.QuoteText&rdquo;</p>
+    <footer>
+        — @Model.QuoteAuthor
+        <span class="quote-attribution"></span>
+    </footer>
+</blockquote>

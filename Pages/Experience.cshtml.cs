@@ -2,6 +2,120 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Portfolio.Pages;
 
+public class ExperienceModel : PageModel
+{
+    public IReadOnlyList<ExperienceEntry> Roles { get; } =
+    [
+        new(
+            "Addnode Group", "https://www.addnodegroup.com",
+            "Software Developer", "Oct 2022 — Present", "Pune, India / Karlskrona, Sweden",
+            "Enterprise GIS Platform for Swedish Municipalities",
+            "Developing an enterprise GIS platform built on ESRI ArcGIS Pro, enabling around 100 Swedish " +
+            "municipalities to manage GIS-driven town planning, infrastructure, and urban development.",
+            [
+                "Develop enterprise features using C#, .NET, WPF, and the ArcGIS Pro SDK.",
+                "Design and build custom ArcGIS Pro add-ins using C# and Python to enhance spatial analysis and planning workflows.",
+                "Design and develop REST APIs that integrate third-party geospatial services into the platform.",
+                "Collaborate closely with Product Owners, Project Managers, and engineering teams across India, Sweden, and Lithuania to deliver new product capabilities.",
+                "Represented Addnode India at the ESRI European Summit, collaborating with ESRI experts and GIS professionals."
+            ],
+            [
+                "Platform used by ~100 Swedish municipalities",
+                "Cross-functional collaboration across 3 countries",
+                "Enterprise desktop and GIS application development"
+            ],
+            ["C#", ".NET", "WPF", "ArcGIS Pro SDK", "Python", "SQL Server", "REST APIs", "GIS"]
+        ),
+        new(
+            "Cognizant", "https://www.cognizant.com",
+            "Senior Consultant", "Dec 2021 — Oct 2022", "Pune, India",
+            "Medical Device Registration Platform",
+            "Developed the Device Registration module responsible for securely onboarding infusion pumps " +
+            "into a connected medical device ecosystem.",
+            [
+                "Designed and implemented REST APIs and MQTT-based communication for secure device registration.",
+                "Mentored 3–5 developers, providing technical guidance, code reviews, and implementation support.",
+                "Built a proof of concept that enabled the complete application stack to run on a local Kubernetes cluster.",
+                "The Kubernetes proof of concept was later adopted by the DevOps team as the foundation for local development and deployment.",
+                "Collaborated with architects and product teams to deliver secure and scalable healthcare solutions."
+            ],
+            new[]
+            {
+                "Mentored junior developers",
+                "Kubernetes POC adopted by DevOps",
+                "Enterprise IoT and healthcare platform"
+            },
+            ["C#", "ASP.NET Core", "WPF", "MQTT", "IoT", "Docker", "Kubernetes", "REST APIs"]
+        ),
+        new(
+            "CoreView Systems", "https://coreviewsystems.com",
+            "Senior Software Engineer", "Sep 2021 — Nov 2021", "Pune, India",
+            "Electricity Customer Management System",
+            "Developed enterprise desktop applications supporting electricity customer management, billing, " +
+            "and service operations.",
+            [
+                "Developed WPF applications following the MVVM architecture.",
+                "Built background services for automated billing and meter-reading processing.",
+                "Designed and implemented REST APIs supporting customer management and billing operations.",
+                "Collaborated with the development team to deliver new features and maintain application reliability."
+            ],
+            [],
+            ["C#", ".NET", "WPF", "MVVM", "SQL Server", "REST APIs"]
+        ),
+        new(
+            "S&P Global", "https://www.spglobal.com/market-intelligence",
+            "Senior Software Developer", "Mar 2017 — Sep 2021", "Gurgaon, India",
+            "Enterprise Financial Data Processing Platform",
+            "Developed enterprise applications responsible for processing financial data, analytics, and " +
+            "transaction reporting used across global financial products.",
+            [
+                "Developed REST APIs consumed by enterprise desktop and web applications.",
+                "Migrated backend services from .NET Framework to modern .NET, improving maintainability and application performance.",
+                "Built and maintained CI/CD pipelines using Azure DevOps.",
+                "Developed backend services that consumed Kafka events generated from Attunity CDC, processing changes to financial data items and ratios.",
+                "Implemented business logic that executed hundreds of financial calculations on every incoming change before publishing the processed results for downstream enterprise applications.",
+                "Collaborated with distributed engineering teams across India, the United States, and Canada throughout the software development lifecycle."
+            ],
+            [
+                "Processed thousands of financial data change events",
+                "Performed hundreds of financial calculations for each incoming data update",
+                "Worked with globally distributed engineering teams"
+            ],
+            ["C#", ".NET", "ASP.NET Core", "WPF", "MVVM", "SQL Server", "Azure DevOps", "Kafka", "REST APIs"]
+        ),
+        new(
+            "Capgemini", "https://www.capgemini.com",
+            "Software Developer", "Aug 2014 — Mar 2017", "Noida, India",
+            "Insurance Policy Management System (Client: RSA Insurance Group)",
+            "Started my software engineering career by developing enterprise desktop applications for policy " +
+            "administration and insurance operations.",
+            [
+                "Developed and enhanced WPF applications using the MVVM architecture.",
+                "Implemented new business features and resolved production issues.",
+                "Participated in requirement analysis, effort estimation, and application enhancements.",
+                "Collaborated with multiple development teams across India and Sweden to deliver enterprise solutions.",
+                "Worked directly with client stakeholders to investigate and resolve production incidents."
+            ],
+            [
+                "Contributed to enterprise insurance applications",
+                "International collaboration with teams in India and Sweden",
+                "Built a strong foundation in enterprise software development"
+            ],
+            ["C#", ".NET", "WPF", "MVVM", "SQL Server"]
+        ),
+    ];
+
+    // Add personal/side projects here as you build them.
+    public IReadOnlyList<SideProjectEntry> SideProjects { get; } =
+    [
+        new("Portfolio.sln", "Portfolio website", "The site you're looking at right now.", ["ASP.NET Core"], "https://github.com/ritashkoul/ritash-portfolio"),
+    ];
+
+    public void OnGet()
+    {
+    }
+}
+
 public record ExperienceEntry(
     string Company,
     string CompanyUrl,
@@ -9,86 +123,9 @@ public record ExperienceEntry(
     string Duration,
     string Location,
     string ProjectTitle,
-    string Description,
+    string ProjectSummary,
+    string[] KeyContributions,
+    string[] Highlights,
     string[] Tech);
 
 public record SideProjectEntry(string FileName, string Title, string Description, string[] Tags, string? Link);
-
-public class ExperienceModel : PageModel
-{
-    // Drawn from the résumé. Descriptions focus on the problem, my role, and
-    // the tech used - not internal/proprietary specifics.
-    public IReadOnlyList<ExperienceEntry> Roles { get; } = new List<ExperienceEntry>
-    {
-        new(
-            "Addnode Group", "https://www.addnodegroup.com",
-            "Lead Software Developer", "Oct 2022 — Present", "Pune, India / Karlskrona, Sweden",
-            "Map and Planning",
-            "Developing an enterprise GIS application on ESRI's ArcGIS Pro platform for Swedish municipalities, " +
-"supporting GIS-driven town planning and urban development workflows. Collaborating with product " +
-"owners and project managers to design and deliver scalable GIS solutions. " +
-"Building custom WPF and Python add-ins for ArcGIS Pro to streamline spatial analysis and " +
-"planning workflows. Working closely with the ESRI Sweden team to integrate new ArcGIS Pro " +
-"capabilities. Designing and developing REST APIs that integrate third-party geospatial data " +
-"services with our enterprise platform. Represented Addnode India at the ESRI European Summit, " +
-"engaging with ESRI experts and industry leaders on enterprise GIS solutions.",
-            ["C#", ".NET", ".NET Core", "WPF", "SQL Server", "REST APIs", "ArcGIS Pro SDK", "Python", "GIS"]
-        ),
-        new(
-    "Cognizant", "https://www.cognizant.com",
-    "Senior Consultant", "Dec 2021 — Oct 2022", "Pune, India",
-     "FK VSS Suite — Device Registration",
-    "Led the development of the Device Registration module, the primary entry point of the medical " +
-    "device ecosystem, enabling secure onboarding of infusion pumps into the platform. Designed and " +
-    "implemented REST APIs and MQTT-based IoT communication for device provisioning and registration. " +
-    "Led a team of developers, driving technical design, implementation, and delivery of key features. " +
-    "Additionally, built a proof of concept for running the complete application stack on a local " +
-    "Kubernetes cluster, laying the foundation for the team's containerization and Kubernetes adoption.",
-    ["C#", ".NET", "ASP.NET Core", "WPF", "MQTT", "IoT", "REST APIs", "Kubernetes", "Docker"]
-),
-        new(
-        "CoreView Systems", "https://coreviewsystems.com",
-        "Senior Software Engineer", "Sep 2021 — Nov 2021", "Pune, India",
-        "ECMS",
-        "Developed a WPF application using the MVVM architecture for an electricity customer management " +
-        "system, delivering a responsive and maintainable user experience. Implemented background " +
-        "services for automated billing, meter-reading processing, and data synchronization. Designed " +
-        "and integrated REST APIs to support real-time customer information, billing operations, and " +
-        "service request management.",
-        ["C#", ".NET", "WPF", "MVVM", "SQL Server", "REST APIs"]
-    ),
-      new(
-    "S&P Global", "https://www.spglobal.com/market-intelligence",
-    "Senior Software Developer", "Mar 2017 — Sep 2021", "Gurgaon, India",
-    "Financial Data & Transaction Processing",
-    "Developed and maintained enterprise applications for financial data processing and transaction " +
-    "reporting, building REST APIs consumed by WPF and web applications to calculate and deliver " +
-    "large-scale financial analytics. Led the migration of backend services from .NET Framework to " +
-    ".NET, improving performance and maintainability. Established CI/CD pipelines using Azure DevOps " +
-    "and designed a Kafka-based publish-subscribe system to synchronize real-time data across " +
-    "distributed applications during a large-scale company integration.",
-    ["C#", ".NET", "ASP.NET Core", "WPF", "MVVM", "SQL Server", "REST APIs", "Azure DevOps", "Kafka"]
-),
-       new(
-    "Capgemini", "https://www.capgemini.com",
-    "Software Developer", "Aug 2014 — Mar 2017", "Noida, India",
-    "Insurance Policy Management System (Client: RSA Insurance Group)",
-    "Developed and enhanced WPF applications using the MVVM architecture for an enterprise insurance " +
-    "platform. Implemented new features, integrated business logic, and resolved production issues " +
-    "to improve application stability and user experience. Collaborated with business stakeholders " +
-    "on requirement analysis, effort estimation, and change requests, while working directly with " +
-    "the client to troubleshoot and resolve production incidents.",
-    ["C#", ".NET Framework", "WPF", "MVVM", "WCF", "SQL Server"]
-),
-    };
-
-    // Optional - add personal/side projects here as you build them.
-    public IReadOnlyList<SideProjectEntry> SideProjects { get; } = new List<SideProjectEntry>
-    {
-        // new("ThisPortfolio.sln", "This Portfolio Site", "The site you're looking at right now.", new[] { "ASP.NET Core", "Security" }, "https://github.com/your-handle/portfolio"),
-    };
-
-    public void OnGet()
-    {
-    }
-}
