@@ -60,7 +60,7 @@ else
 
 app.UseStatusCodePagesWithReExecute("/Error", "?code={0}");
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 // ---------------------------------------------------------------------
 // OWASP A05:2021 / A03:2021 (XSS) - a strict, explicit security header set.
