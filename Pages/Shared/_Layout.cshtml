@@ -10,12 +10,11 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>@ViewData["Title"] · Portfolio</title>
+    <title>@ViewData["Title"] · Ritash Koul</title>
     <meta name="description" content="Portfolio of an ASP.NET Core developer." />
-    <meta name="theme-color" content="#12141a" />
+    <meta name="theme-color" id="theme-color-meta" content="#171b20" />
     <link rel="icon" type="image/svg+xml" href="~/favicon.svg" />
-    <!-- Deliberately no third-party font/CDN requests: everything is same-origin,
-         so the CSP in Program.cs can stay at default-src 'self' with no exceptions. -->
+    <script src="~/js/theme-init.js" asp-append-version="true"></script>
     <script type="application/ld+json" src="~/schema.json"></script>
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 </head>
@@ -44,6 +43,10 @@
             </nav>
 
             <div class="header-actions">
+                <button type="button" id="theme-toggle" class="btn-icon theme-toggle" title="Toggle light/dark theme" aria-label="Toggle light/dark theme">
+                    <svg class="icon icon-sun" aria-hidden="true"><use href="#icon-sun"></use></svg>
+                    <svg class="icon icon-moon" aria-hidden="true"><use href="#icon-moon"></use></svg>
+                </button>
                 <a class="btn-icon" href="~/resume/resume.pdf" download title="Download résumé" aria-label="Download résumé">
                     <svg class="icon" aria-hidden="true"><use href="#icon-download"></use></svg>
                 </a>

@@ -3,10 +3,10 @@
   "@type": "Person",
   "name": "Ritash Koul",
   "jobTitle": "Senior Software Developer",
-  "url": "https://your-domain-here/",
+  "url": "https://ritashkoul-dev.onrender.com/",
   "email": "mailto:riteshkoul30sep@gmail.com",
   "address": {
-    "@type": "PostalAddress",
+    "@type": "Pune",
     "addressLocality": "Pune",
     "addressRegion": "Maharashtra",
     "addressCountry": "IN"

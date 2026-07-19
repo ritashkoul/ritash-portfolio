@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ritashkoul-dev.onrender.com/sitemap.xml
