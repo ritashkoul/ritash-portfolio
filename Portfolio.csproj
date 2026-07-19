@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+
+    <!-- Security hardening at the build level -->
+    <InvariantGlobalization>true</InvariantGlobalization>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <WarningsAsErrors>Nullable</WarningsAsErrors>
+  </PropertyGroup>
+
+  <!-- No external NuGet packages: this is a static-content site (About,
+       Experience, Résumé) with no database and no Markdown rendering to
+       do server-side. Zero third-party dependencies = zero supply-chain
+       surface (OWASP A06:2021). -->
+
+</Project>

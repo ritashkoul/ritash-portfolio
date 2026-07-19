@@ -1,0 +1,26 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Ritash Koul",
+  "jobTitle": "Senior Software Developer",
+  "url": "https://your-domain-here/",
+  "email": "mailto:riteshkoul30sep@gmail.com",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Pune",
+    "addressRegion": "Maharashtra",
+    "addressCountry": "IN"
+  },
+  "sameAs": [
+    "https://www.linkedin.com/in/ritash-koul-a7ab9050",
+    "https://www.instagram.com/koulheadedritesh/"
+  ],
+  "knowsAbout": [
+    "C#",
+    ".NET Core",
+    "ASP.NET Core",
+    "WPF",
+    "SQL Server",
+    "Azure DevOps"
+  ]
+}

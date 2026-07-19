@@ -1,0 +1,78 @@
+@{
+    var path = Context.Request.Path.Value ?? "/";
+    bool IsActive(string prefix) => prefix == "/"
+        ? path == "/"
+        : path.StartsWith(prefix, StringComparison.OrdinalIgnoreCase);
+    string TabClass(string prefix) => IsActive(prefix) ? "tab active" : "tab";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewData["Title"] · Portfolio</title>
+    <meta name="description" content="Portfolio of an ASP.NET Core developer." />
+    <meta name="theme-color" content="#12141a" />
+    <link rel="icon" type="image/svg+xml" href="~/favicon.svg" />
+    <!-- Deliberately no third-party font/CDN requests: everything is same-origin,
+         so the CSP in Program.cs can stay at default-src 'self' with no exceptions. -->
+    <script type="application/ld+json" src="~/schema.json"></script>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <partial name="_Icons" />
+
+    <div class="app-window">
+        <header class="tab-bar" role="banner">
+            <a href="/" class="brand" aria-label="Home">
+                <svg class="icon" aria-hidden="true"><use href="#icon-code"></use></svg>
+            </a>
+
+            <nav class="tabs" aria-label="Main navigation">
+                <a class="@TabClass("/")" href="/">
+                    <svg class="icon" aria-hidden="true"><use href="#icon-eye"></use></svg>
+                    <span>About</span>
+                </a>
+                <a class="@TabClass("/Experience")" href="/Experience">
+                    <svg class="icon" aria-hidden="true"><use href="#icon-code"></use></svg>
+                    <span>Experience</span>
+                </a>
+                <a class="@TabClass("/Resume")" href="/Resume">
+                    <svg class="icon" aria-hidden="true"><use href="#icon-download"></use></svg>
+                    <span>Resume</span>
+                </a>
+            </nav>
+
+            <div class="header-actions">
+                <a class="btn-icon" href="~/resume/resume.pdf" download title="Download résumé" aria-label="Download résumé">
+                    <svg class="icon" aria-hidden="true"><use href="#icon-download"></use></svg>
+                </a>
+            </div>
+        </header>
+
+        <main class="content" role="main">
+            @RenderBody()
+        </main>
+
+        <footer class="status-bar" role="contentinfo">
+            <div class="status-right social-links">
+                <a href="https://www.linkedin.com/in/ritash-koul-a7ab9050/" target="_blank" rel="noopener noreferrer">
+                    <svg class="icon icon-sm" aria-hidden="true">
+                        <use href="#icon-linkedin"></use>
+                    </svg>
+                    LinkedIn
+                </a>
+
+                <a href="https://www.instagram.com/koulheadedritesh" target="_blank" rel="noopener noreferrer">
+                    <svg class="icon icon-sm" aria-hidden="true">
+                        <use href="#icon-instagram"></use>
+                    </svg>
+                    Instagram
+                </a>
+            </div>
+        </footer>
+    </div>
+
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</body>
+</html>

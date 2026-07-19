@@ -1,0 +1,71 @@
+@page
+@model Portfolio.Pages.ExperienceModel
+@{
+    ViewData["Title"] = "Experience";
+}
+
+<span class="eyebrow"><svg class="icon icon-sm" aria-hidden="true"><use href="#icon-code"></use></svg> // experience</span>
+<h1>Experience</h1>
+<p class="lede">10+ years across desktop and web .NET development.</p>
+
+<div class="timeline section">
+    @foreach (var role in Model.Roles)
+    {
+        <div class="timeline-item">
+            <div class="timeline-marker" aria-hidden="true"></div>
+            <div class="timeline-body">
+                <div class="timeline-header">
+                    <h3>@role.Role</h3>
+                    <span class="timeline-duration">
+                        <svg class="icon icon-sm" aria-hidden="true"><use href="#icon-calendar"></use></svg> @role.Duration
+                    </span>
+                </div>
+                <div class="timeline-company">
+                    <a href="@role.CompanyUrl" target="_blank" rel="noopener noreferrer">
+                        @role.Company <svg class="icon icon-sm" aria-hidden="true"><use href="#icon-external"></use></svg>
+                    </a>
+                    <span class="timeline-location">@role.Location</span>
+                </div>
+                <div class="timeline-project">@role.ProjectTitle</div>
+                <p>@role.Description</p>
+                <div class="tag-row">
+                    @foreach (var tech in role.Tech)
+                    {
+                        <span class="tag">@tech</span>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@if (Model.SideProjects.Count > 0)
+{
+    <section class="section">
+        <h2><svg class="icon" aria-hidden="true"><use href="#icon-code"></use></svg> Side projects</h2>
+        <div class="card-grid">
+            @foreach (var project in Model.SideProjects)
+            {
+                <div class="card">
+                    <div class="file-name"><svg class="icon icon-sm" aria-hidden="true"><use href="#icon-code"></use></svg> @project.FileName</div>
+                    <h3>@project.Title</h3>
+                    <p>@project.Description</p>
+                    <div class="tag-row">
+                        @foreach (var tag in project.Tags)
+                        {
+                            <span class="tag">@tag</span>
+                        }
+                    </div>
+                    @if (!string.IsNullOrEmpty(project.Link))
+                    {
+                        <div class="card-link">
+                            <a href="@project.Link" target="_blank" rel="noopener noreferrer">
+                                View on GitHub <svg class="icon icon-sm" aria-hidden="true"><use href="#icon-external"></use></svg>
+                            </a>
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+    </section>
+}

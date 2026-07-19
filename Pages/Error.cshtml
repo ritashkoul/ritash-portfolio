@@ -1,0 +1,24 @@
+@page "{code:int?}"
+@model Portfolio.Pages.ErrorModel
+@{
+    ViewData["Title"] = "Error";
+}
+
+<span class="eyebrow">// @Model.StatusCode</span>
+<h1>@(Model.StatusCode == 404 ? "Page not found" : "Something went wrong")</h1>
+<p class="lede">
+    @(Model.StatusCode == 404
+        ? "That page doesn't exist. It may have moved, or the link is wrong."
+        : "An unexpected error occurred. It's been logged - no details are shown here on purpose.")
+</p>
+
+@if (!string.IsNullOrEmpty(Model.RequestId))
+{
+    <p class="mono-dim">
+        Reference: @Model.RequestId
+    </p>
+}
+
+<div class="button-row">
+    <a class="btn btn-primary" href="/">← Back home</a>
+</div>

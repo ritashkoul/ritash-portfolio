@@ -1,0 +1,22 @@
+@page
+@model Portfolio.Pages.ResumeModel
+@{
+    ViewData["Title"] = "Resume";
+}
+
+<span class="eyebrow"><svg class="icon icon-sm" aria-hidden="true"><use href="#icon-download"></use></svg> // resume.pdf</span>
+<h1>Résumé</h1>
+<p class="lede">View it inline below, or download the PDF directly.</p>
+
+<div class="button-row">
+    <a class="btn btn-primary" href="~/resume/resume.pdf" download>
+        <svg class="icon" aria-hidden="true"><use href="#icon-download"></use></svg> Download PDF
+    </a>
+    <a class="btn" href="~/resume/resume.pdf" target="_blank" rel="noopener noreferrer">
+        Open in new tab <svg class="icon" aria-hidden="true"><use href="#icon-external"></use></svg>
+    </a>
+</div>
+
+<div class="resume-frame section">
+    <iframe src="/resume/resume.pdf" title="Résumé preview" loading="lazy"></iframe>
+</div>
