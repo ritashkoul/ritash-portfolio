@@ -1,38 +1,25 @@
 # Portfolio — ASP.NET Core
 
-Ritash Koul's personal portfolio: About, Experience, and a viewable +
-downloadable résumé. No database, no login, no user input anywhere — the
+My personal portfolio: About, Experience, and a viewable +
+downloadable resume. No database, no login, no user input anywhere — the
 simplest architecture that still looks and feels like a real, professional
-site, hardened against the OWASP Top 10.
+site..
 
 ## What's on the site
 
-- **About** (`/`) — bio, skills, education, résumé link, LinkedIn/Instagram/email
-- **Experience** (`/Experience`) — a timeline of roles pulled from the résumé,
+- **About** (`/`) — bio, skills, education, resume link, LinkedIn/Instagram/email
+- **Experience** (`/Experience`) — a timeline of roles pulled from the resume,
   each with the project worked on, a plain-language description, tech tags,
   and a link to the company's public website
-- **Resume** (`/Resume`) — the résumé PDF viewable inline (via `<iframe>`,
+- **Resume** (`/Resume`) — the resume PDF viewable inline (via `<iframe>`,
   same-origin, no `object-src` exception needed) plus a direct download button
 
 ## Already filled in
 
-- `Pages/Index.cshtml` — name, role, bio, skills, education (from the résumé)
-- `Pages/Experience.cshtml.cs` — all 5 roles from the résumé, with company
+- `Pages/Index.cshtml` — name, role, bio, skills, education (from the resume)
+- `Pages/Experience.cshtml.cs` — all 5 roles from the resume, with company
   links verified against each company's real public site
-- `wwwroot/resume/resume.pdf` — the actual résumé
-
-## Still worth doing before you go live
-
-1. `Pages/Index.cshtml` and `Pages/Shared/_Layout.cshtml` — the LinkedIn and
-   Instagram links are still placeholders (`your-handle`) since I don't have
-   those URLs. Search for `your-handle` and swap in your real profile links.
-   Same for the GitHub link in the footer if you have/want one.
-2. If you build any personal projects later, add them to `SideProjects` in
-   `Pages/Experience.cshtml.cs` — that section only appears on the page once
-   it has at least one entry.
-3. Double-check the résumé PDF doesn't have personal metadata you don't want
-   distributed (Author/Company fields in the file properties) - most PDF
-   tools have a "remove personal information" option.
+- `wwwroot/resume/resume.pdf` — the actual resume
 
 ## Opening in Visual Studio
 
@@ -76,29 +63,3 @@ persisting, Render's ephemeral filesystem isn't a concern here.
 
 Either way, the security headers and HTTPS redirection in `Program.cs` work
 the same regardless of host.
-
-## OWASP Top 10 (2021) — what's implemented and where
-
-Even a static-content site benefits from these — mostly headers and
-configuration, not fancy code.
-
-| Risk | Mitigation | Where |
-|---|---|---|
-| A01 Broken Access Control | No admin routes, no user input, nothing to gate access to | — |
-| A02 Cryptographic Failures | HTTPS enforced site-wide, HSTS enabled in production | `Program.cs` |
-| A03 Injection | No database, no raw SQL, no dynamic queries. Razor auto-encodes all output | `Program.cs` |
-| A04 Insecure Design | Per-IP rate limiting on every request; request body/header size limits at the Kestrel level | `Program.cs` |
-| A05 Security Misconfiguration | Strict CSP with no `unsafe-inline`, `X-Frame-Options`, `X-Content-Type-Options`, `Server` header removed, generic error pages (no stack traces) in production | `Program.cs`, `Pages/Error.cshtml` |
-| A06 Vulnerable/Outdated Components | Zero external NuGet dependencies — nothing to have vulnerabilities in the first place | `Portfolio.csproj` |
-| A07 Identification & Authentication Failures | No authentication exists on this site — nothing to compromise | — |
-| A08 Software & Data Integrity Failures | No script/style loaded from a third-party CDN — everything same-origin, including the résumé PDF viewer | `Pages/Shared/_Layout.cshtml`, `Pages/Resume.cshtml` |
-| A09 Security Logging & Monitoring Failures | Standard ASP.NET Core request logging via `ILogger` | built-in |
-| A10 Server-Side Request Forgery | No outbound HTTP requests made from server code — nothing to forge | — |
-
-## If you want a blog later
-
-This was deliberately cut to keep the site simple and maintenance-free. If
-you start writing regularly and want to add one back — with an in-browser
-editor restricted to just you, backed by a small database — that's a clean
-addition to bolt on later rather than something you need to design in from
-day one.
