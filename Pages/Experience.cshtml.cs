@@ -109,6 +109,7 @@ public class ExperienceModel : PageModel
     public IReadOnlyList<SideProjectEntry> SideProjects { get; } =
     [
         new("Portfolio.sln", "Portfolio website", "The site you're looking at right now.", ["ASP.NET Core"], "https://github.com/ritashkoul/ritash-portfolio"),
+        new("DeskRAG", "DeskRAG windows desktop application", "DeskRAG is a Windows desktop application for semantic search over your own documents.", [".NET, WPF, AI, Semantic Search, RAG, Ollama"], "https://github.com/ritashkoul/DeskRAG-releases")
     ];
 
     public void OnGet()
