@@ -12,7 +12,7 @@
   </PropertyGroup>
 
   <!-- No external NuGet packages: this is a static-content site (About,
-       Experience, Résumé) with no database and no Markdown rendering to
+       Experience, Resume) with no database and no Markdown rendering to
        do server-side. Zero third-party dependencies = zero supply-chain
        surface (OWASP A06:2021). -->
 

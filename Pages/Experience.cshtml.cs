@@ -8,7 +8,7 @@ public class ExperienceModel : PageModel
     [
         new(
             "Addnode Group", "https://www.addnodegroup.com",
-            "Software Developer", "Oct 2022 — Present", "Pune, India / Karlskrona, Sweden",
+            "Senior Developer", "Oct 2022 — Present", "Pune, India / Karlskrona, Sweden",
             "Enterprise GIS Platform for Swedish Municipalities",
             "Developing an enterprise GIS platform built on ESRI ArcGIS Pro, enabling around 100 Swedish " +
             "municipalities to manage GIS-driven town planning, infrastructure, and urban development.",
