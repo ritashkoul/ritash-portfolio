@@ -1,6 +1,6 @@
 # Portfolio — ASP.NET Core
 
-My personal portfolio: About, Experience, and a viewable +
+My portfolio: About, Experience, and a viewable +
 downloadable resume. No database, no login, no user input anywhere — the
 simplest architecture that still looks and feels like a real, professional
 site..
@@ -39,16 +39,9 @@ compiled app, nothing to persist between deploys.
 **Recommended: Azure App Service (Free F1 tier)** — native ASP.NET Core
 support (no Docker required), a clean URL like `yourname.azurewebsites.net`.
 
-1. Create a free Azure account (no charge on the F1 tier — a payment method
-   is required for identity verification, but you won't be billed as long
-   as you stay on F1 and add no paid resources).
-2. Deploy with the Azure CLI:
-   ```bash
-   az webapp up --name your-app-name --runtime "DOTNETCORE:8.0" --sku F1
-   ```
-3. In **Configuration → General settings**, confirm **HTTPS Only** is on.
-4. For continuous deployment on every push, connect the repo in the Azure
-   Portal's **Deployment Center**.
+Create a free Azure account (no charge on the F1 tier — a payment method
+is required for identity verification, but you won't be billed as long
+as you stay on F1 and add no paid resources).
 
 **Alternative: Render.com** — uses the included `Dockerfile`, doesn't require
 a card, auto-deploys on push. Since there's no database to worry about

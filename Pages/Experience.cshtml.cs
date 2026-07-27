@@ -39,12 +39,11 @@ public class ExperienceModel : PageModel
                 "The Kubernetes proof of concept was later adopted by the DevOps team as the foundation for local development and deployment.",
                 "Collaborated with architects and product teams to deliver secure and scalable healthcare solutions."
             ],
-            new[]
-            {
+            [
                 "Mentored junior developers",
                 "Kubernetes POC adopted by DevOps",
                 "Enterprise IoT and healthcare platform"
-            },
+            ],
             ["C#", "ASP.NET Core", "WPF", "MQTT", "IoT", "Docker", "Kubernetes", "REST APIs"]
         ),
         new(
@@ -78,8 +77,7 @@ public class ExperienceModel : PageModel
             ],
             [
                 "Processed thousands of financial data change events",
-                "Performed hundreds of financial calculations for each incoming data update",
-                "Worked with globally distributed engineering teams"
+                "Performed hundreds of financial calculations for each incoming data update"
             ],
             ["C#", ".NET", "ASP.NET Core", "WPF", "MVVM", "SQL Server", "Azure DevOps", "Kafka", "REST APIs"]
         ),
@@ -96,11 +94,7 @@ public class ExperienceModel : PageModel
                 "Collaborated with multiple development teams across India and Sweden to deliver enterprise solutions.",
                 "Worked directly with client stakeholders to investigate and resolve production incidents."
             ],
-            [
-                "Contributed to enterprise insurance applications",
-                "International collaboration with teams in India and Sweden",
-                "Built a strong foundation in enterprise software development"
-            ],
+            [],
             ["C#", ".NET", "WPF", "MVVM", "SQL Server"]
         ),
     ];
@@ -108,13 +102,9 @@ public class ExperienceModel : PageModel
     // Add personal/side projects here as you build them.
     public IReadOnlyList<SideProjectEntry> SideProjects { get; } =
     [
-        new("Portfolio.sln", "Portfolio website", "The site you're looking at right now.", ["ASP.NET Core"], "https://github.com/ritashkoul/ritash-portfolio"),
+        new("Portfolio", "Portfolio website", "The site you're looking at right now.", ["ASP.NET Core"], "https://github.com/ritashkoul/ritash-portfolio"),
         new("DeskRAG", "DeskRAG windows desktop application", "DeskRAG is a Windows desktop application for semantic search over your own documents.", [".NET, WPF, AI, Semantic Search, RAG, Ollama"], "https://github.com/ritashkoul/DeskRAG-releases")
     ];
-
-    public void OnGet()
-    {
-    }
 }
 
 public record ExperienceEntry(
