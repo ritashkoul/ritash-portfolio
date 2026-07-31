@@ -1,87 +1,202 @@
 @page
 @model Portfolio.Pages.IndexModel
+
 @{
     ViewData["Title"] = "About";
 }
 
-<span class="eyebrow"><svg class="icon icon-sm" aria-hidden="true"><use href="#icon-eye"></use></svg> // about</span>
+<section class="home-hero">
+    <span class="eyebrow">
+        <svg class="icon icon-sm" aria-hidden="true">
+            <use href="#icon-eye"></use>
+        </svg>
+        // about
+    </span>
 
-<pre class="hero-code"><span class="tok-keyword">public</span> <span class="tok-keyword">sealed</span> <span class="tok-keyword">class</span> <span class="tok-type">Developer</span> : <span class="tok-type">Person</span>
+    <pre class="hero-code" aria-label="Developer profile represented as C# code"><span class="tok-keyword">public</span> <span class="tok-keyword">sealed</span> <span class="tok-keyword">class</span> <span class="tok-type">Developer</span> : <span class="tok-type">Person</span>
 {
     <span class="tok-keyword">public</span> <span class="tok-type">string</span> <span class="tok-method">Name</span> => <span class="tok-string">"Ritash Koul"</span>;
     <span class="tok-keyword">public</span> <span class="tok-type">string</span> <span class="tok-method">Role</span> => <span class="tok-string">"Senior Software Developer"</span>;
-    <span class="tok-keyword">public</span> <span class="tok-type">string</span> <span class="tok-method">Location</span> => <span class="tok-string">"Pune, Maharashtra, India"</span>;
-    <span class="tok-keyword">public</span> <span class="tok-type">int</span> <span class="tok-method">YearsExperience</span> => <span class="tok-string">10</span>;<span class="caret"></span>
+    <span class="tok-keyword">public</span> <span class="tok-type">string</span> <span class="tok-method">Location</span> => <span class="tok-string">"Pune, India"</span>;
+    <span class="tok-keyword">public</span> <span class="tok-type">int</span> <span class="tok-method">YearsOfExperience</span> => <span class="tok-string">10</span>;
+    <span class="tok-keyword">public</span> <span class="tok-type">string</span>[] <span class="tok-method">Focus</span> =>
+    [
+        <span class="tok-string">"Enterprise .NET"</span>,
+        <span class="tok-string">"Desktop & Backend Engineering"</span>,
+        <span class="tok-string">"GIS & Distributed Systems"</span>
+    ];<span class="caret"></span>
 }</pre>
 
-<p class="lede">
-    Senior developer with over 10 years building client/server, web, and Windows
-    applications on the <strong>.NET</strong> stack — C#, WPF, ASP.NET / ASP.NET Core,
-    WCF, and REST APIs, backed by SQL Server. I've worked across the full lifecycle:
-    requirement gathering, architecture, hands-on development, and leading small teams
-    through delivery. Currently working on developing a GIS-based town planning tool,
-    integrating with ESRI's ArcGIS Pro platform.
-</p>
+    <h1 class="home-title">
+        Building enterprise software across desktop, backend, GIS, IoT, and distributed systems.
+    </h1>
 
-<div class="button-row">
-    <a class="btn btn-primary" href="/Resume">
-        <svg class="icon" aria-hidden="true"><use href="#icon-download"></use></svg> View / download resume
-    </a>
-    <a class="btn" href="/Experience">
-        View full experience
-        <svg class="icon" aria-hidden="true"><use href="#icon-arrow-right"></use></svg>
-    </a>
-</div>
-
-<div class="using-block">
-    <div>// find me elsewhere</div>
-    <div class="chip-row">
-        <a class="chip" href="https://www.linkedin.com/in/ritash-koul-a7ab9050" target="_blank" rel="noopener noreferrer">
-            <svg class="icon icon-sm" aria-hidden="true"><use href="#icon-linkedin"></use></svg> LinkedIn
-        </a>
-        <a class="chip" href="https://www.instagram.com/koulheadedritesh/" target="_blank" rel="noopener noreferrer">
-            <svg class="icon icon-sm" aria-hidden="true"><use href="#icon-instagram"></use></svg> Instagram
-        </a>
-        <a class="chip" href="mailto:riteshkoul30sep@gmail.com">
-            <svg class="icon icon-sm" aria-hidden="true"><use href="#icon-mail"></use></svg> Email
-        </a>
-    </div>
-</div>
-
-<div class="using-block">
-    <div>// skills</div>
-    <div class="chip-row">
-        <span class="chip">C#</span>
-        <span class="chip">.NET Framework</span>
-        <span class="chip">.NET Core</span>
-        <span class="chip">WPF / MVVM</span>
-        <span class="chip">ASP.NET / ASP.NET Core</span>
-        <span class="chip">WCF</span>
-        <span class="chip">Web APIs</span>
-        <span class="chip">T-SQL</span>
-        <span class="chip">SQL Server</span>
-        <span class="chip">Python</span>
-        <span class="chip">Azure DevOps</span>
-        <span class="chip">Git / TFS</span>
-    </div>
-</div>
-
-<section class="section">
-    <h2><svg class="icon" aria-hidden="true"><use href="#icon-calendar"></use></svg> Education</h2>
-    <p class="text-dim max-prose">
-        B.E. in Information Technology —
-        <a href="https://www.tcetmumbai.in/" target="_blank" rel="noopener noreferrer">
-            Thakur College of Engineering and Technology
-            <svg class="icon icon-sm" aria-hidden="true"><use href="#icon-external"></use></svg>
-        </a>,
-        University of Mumbai (2014)
+    <p class="lede home-lede">
+        I am a Senior Developer with 10+ years of experience designing and
+        developing enterprise applications using C#, .NET, WPF, ASP.NET Core, SQL Server,
+        and event-driven technologies.
     </p>
+
+    <p class="home-introduction">
+        My experience spans GIS, financial services, healthcare, insurance, and utility
+        platforms. I have worked on product modernization, enterprise desktop applications,
+        REST APIs, microservices, Kafka-based processing, Kubernetes environments, and
+        integrations with complex external systems.
+    </p>
+
+    <div class="button-row">
+        <a class="btn btn-primary" href="/Experience">
+            Explore my experience
+            <svg class="icon" aria-hidden="true">
+                <use href="#icon-arrow-right"></use>
+            </svg>
+        </a>
+
+        <a class="btn" href="/Resume">
+            <svg class="icon" aria-hidden="true">
+                <use href="#icon-eye"></use>
+            </svg>
+            View resume
+        </a>
+
+        <a class="btn" href="~/resume/resume.pdf" download>
+            <svg class="icon" aria-hidden="true">
+                <use href="#icon-download"></use>
+            </svg>
+            Download PDF
+        </a>
+    </div>
 </section>
 
-<blockquote class="quote-of-day section">
-    <p>&ldquo;@Model.QuoteText&rdquo;</p>
-    <footer>
-        — @Model.QuoteAuthor
-        <span class="quote-attribution"></span>
-    </footer>
-</blockquote>
+<section class="section">
+    <span class="eyebrow">
+        <svg class="icon icon-sm" aria-hidden="true">
+            <use href="#icon-tag"></use>
+        </svg>
+        // core technologies
+    </span>
+
+    <h2>Technology stack</h2>
+
+    <div class="skill-groups">
+        <div class="skill-group">
+            <h3>Languages and frameworks</h3>
+
+            <div class="chip-row">
+                <span class="chip">C#</span>
+                <span class="chip">.NET</span>
+                <span class="chip">.NET Framework</span>
+                <span class="chip">ASP.NET Core</span>
+                <span class="chip">Python</span>
+            </div>
+        </div>
+
+        <div class="skill-group">
+            <h3>Desktop and GIS</h3>
+
+            <div class="chip-row">
+                <span class="chip">WPF</span>
+                <span class="chip">MVVM</span>
+                <span class="chip">ArcGIS Pro SDK</span>
+                <span class="chip">ArcPy</span>
+                <span class="chip">Enterprise Geodatabases</span>
+            </div>
+        </div>
+
+        <div class="skill-group">
+            <h3>Backend and integration</h3>
+
+            <div class="chip-row">
+                <span class="chip">REST APIs</span>
+                <span class="chip">Microservices</span>
+                <span class="chip">Kafka</span>
+                <span class="chip">MQTT</span>
+                <span class="chip">Windows Services</span>
+            </div>
+        </div>
+
+        <div class="skill-group">
+            <h3>Data and DevOps</h3>
+
+            <div class="chip-row">
+                <span class="chip">SQL Server</span>
+                <span class="chip">PostgreSQL</span>
+                <span class="chip">Docker</span>
+                <span class="chip">Kubernetes</span>
+                <span class="chip">Azure DevOps</span>
+                <span class="chip">Git</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section home-project-preview">
+    <div class="section-heading-row">
+        <div>
+            <span class="eyebrow">
+                <svg class="icon icon-sm" aria-hidden="true">
+                    <use href="#icon-code"></use>
+                </svg>
+                // current work
+            </span>
+
+            <h2>Modernizing enterprise GIS products</h2>
+        </div>
+
+        <a href="/Experience" class="section-link">
+            View full experience
+            <svg class="icon icon-sm" aria-hidden="true">
+                <use href="#icon-arrow-right"></use>
+            </svg>
+        </a>
+    </div>
+
+    <p>
+        I am currently working on the modernization of Mapping and Town Planning
+        products from ArcMap to ArcGIS Pro. The products are used by more than
+        100 Swedish municipalities for mapping, planning, infrastructure, and
+        urban-development workflows.
+    </p>
+
+    <div class="tag-row">
+        <span class="tag">C#</span>
+        <span class="tag">WPF</span>
+        <span class="tag">ArcGIS Pro SDK</span>
+        <span class="tag">ArcPy</span>
+        <span class="tag">Enterprise GIS</span>
+        <span class="tag">REST APIs</span>
+    </div>
+</section>
+
+<section class="section">
+    <span class="eyebrow">
+        <svg class="icon icon-sm" aria-hidden="true">
+            <use href="#icon-calendar"></use>
+        </svg>
+        // education
+    </span>
+
+    <h2>Education</h2>
+
+    <div class="education-card">
+        <div>
+            <h3>Bachelor of Engineering in Information Technology</h3>
+
+            <p>
+                Thakur College of Engineering and Technology,
+                University of Mumbai
+            </p>
+        </div>
+
+        <span class="education-year">2014</span>
+    </div>
+</section>
+
+@if (!string.IsNullOrWhiteSpace(Model.QuoteText))
+{
+    <blockquote class="quote-of-day section">
+        <p>&ldquo;@Model.QuoteText&rdquo;</p>
+
+        <footer>— @Model.QuoteAuthor</footer>
+    </blockquote>
+}
