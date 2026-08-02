@@ -1,13 +1,3 @@
-/* ============================================================
-   Design tokens
-   Warm charcoal + muted sage/lavender palette - deliberately
-   lower-contrast and lower-saturation than a typical dark theme
-   (soft off-white text on warm charcoal, not stark white-on-black)
-   so it's comfortable to read for a while, not just striking in
-   a screenshot. Fonts fall back to what's already on a dev machine
-   (Cascadia Code, Consolas, Segoe UI) rather than fetching webfonts,
-   which keeps the CSP at default-src 'self' with zero exceptions.
-   ============================================================ */
 :root {
     --bg: #171b20;
     --bg-panel: #1d2228;
@@ -222,7 +212,7 @@ html[data-theme="light"] .theme-toggle .icon-moon {
     margin: 48px auto 24px;
     background: var(--bg-panel);
     border: 1px solid var(--border);
-    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+    border-radius: var(--radius-lg);
     overflow: hidden;
     box-shadow: 0 24px 70px rgba(0,0,0,0.28), 0 2px 8px rgba(0,0,0,0.18);
 }
@@ -1504,19 +1494,18 @@ a.card:hover {
 
 /* ============================================================
    Floating page navigation
+   Experience page only
    ============================================================ */
 
 .scroll-controls {
     position: fixed;
     left: calc(50% + (var(--max-width) / 2) + 16px);
     right: auto;
-    bottom: 64px;
+    bottom: 72px;
+    z-index: 100;
     display: flex;
     flex-direction: column;
     gap: 6px;
-    z-index: 100;
-    width: 38px;
-    height: 38px;
 }
 
 .scroll-control {
@@ -1530,12 +1519,15 @@ a.card:hover {
     align-items: center;
     justify-content: center;
     padding: 0;
-    color: var(--text-dim);
-    background: transparent;
     border: 0;
     border-radius: 50%;
+    color: var(--text-dim);
+    background: transparent;
     cursor: pointer;
-    opacity: 0.88;
+    pointer-events: auto;
+    opacity: 0.9;
+    visibility: visible;
+    transition: color 0.15s ease, background-color 0.15s ease, opacity 0.15s ease, transform 0.15s ease, visibility 0.15s ease;
 }
 
     .scroll-control .icon {
@@ -1546,13 +1538,12 @@ a.card:hover {
     .scroll-control:hover {
         color: var(--accent);
         background: var(--accent-soft);
-        border-radius: 50%;
         opacity: 1;
         transform: scale(1.08);
     }
 
     .scroll-control:active {
-        transform: scale(0.94);
+        transform: scale(0.96);
     }
 
     .scroll-control:focus-visible {
@@ -1560,48 +1551,48 @@ a.card:hover {
         outline-offset: 2px;
     }
 
-    /* Smart visibility */
     .scroll-control.is-hidden {
         opacity: 0;
         visibility: hidden;
         pointer-events: none;
-        transform: scale(0.8);
+        transform: scale(0.82);
     }
 
+html[data-theme="light"] .scroll-control {
+    color: #46515c;
+}
 
-/* ============================================================
-   Responsive positioning
-   ============================================================ */
+    html[data-theme="light"] .scroll-control:hover {
+        color: var(--accent);
+        background: var(--accent-soft);
+    }
 
+/*
+   When there is not enough room outside the centered app window,
+   keep the controls at the right edge of the viewport.
+*/
 @media (max-width: 1080px) {
     .scroll-controls {
         left: auto;
-        right: 12px;
-        bottom: 48px;
+        right: 10px;
+        bottom: 72px;
     }
-
-    /*
-       Give the controls a very subtle circular surface when they
-       need to sit over page content.
-    */
-    .scroll-control {
-        background: color-mix( in srgb, var(--bg-panel) 82%, transparent );
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
-    }
-
-        .scroll-control:hover {
-            background: var(--accent-soft);
-        }
 }
 
+/*
+   Mobile: reserve a narrow lane only on pages that actually contain
+   the scroll controls. This prevents the arrows from covering text.
+*/
 @media (max-width: 640px) {
-    @media (max-width: 640px) {
-        .scroll-controls {
-            right: 8px;
-            bottom: 32px;
-            gap: 4px;
-        }
+    .content:has(.scroll-controls) {
+        padding-right: 50px;
+    }
+
+    .scroll-controls {
+        left: auto;
+        right: 6px;
+        bottom: 72px;
+        gap: 5px;
     }
 
     .scroll-control {
@@ -1617,12 +1608,3 @@ a.card:hover {
             height: 20px;
         }
 }
-
-html[data-theme="light"] .scroll-control {
-    color: #4f5963;
-}
-
-    html[data-theme="light"] .scroll-control:hover {
-        color: var(--accent);
-        background: var(--accent-soft);
-    }
