@@ -1,6 +1,9 @@
-﻿namespace Portfolio.Services;
+﻿using Portfolio.Models;
+
+namespace Portfolio.Services;
 
 public interface IQuoteService
 {
-    Task<(string Text, string Author)> GetDailyQuoteAsync();
+    Task<Quote> GetDailyQuoteAsync(
+        CancellationToken cancellationToken = default);
 }

@@ -4,23 +4,33 @@
     bool IsActive(string prefix) =>
         prefix == "/"
             ? path == "/"
-            : path.StartsWith(prefix, StringComparison.OrdinalIgnoreCase);
+            : path.StartsWith(
+                prefix,
+                StringComparison.OrdinalIgnoreCase);
 
     string TabClass(string prefix) =>
-        IsActive(prefix) ? "tab active" : "tab";
+        IsActive(prefix)
+            ? "tab active"
+            : "tab";
 
-    var pageTitle = ViewData["Title"]?.ToString();
-    var fullTitle = string.IsNullOrWhiteSpace(pageTitle)
-        ? "Ritash Koul · Lead Software Developer"
-        : $"{pageTitle} · Ritash Koul";
+    var pageTitle =
+        ViewData["Title"]?.ToString();
 
-    var description =
-        "Ritash Koul is a Lead Software Developer with 12+ years of experience " +
-        "building enterprise applications using C#, .NET, WPF, ASP.NET Core, " +
-        "ArcGIS Pro SDK, Kafka, Docker, and Kubernetes.";
+    var fullTitle =
+        string.IsNullOrWhiteSpace(pageTitle)
+            ? "Ritash Koul · Lead Software Developer"
+            : $"{pageTitle} · Ritash Koul";
+
+    const string description =
+        "Ritash Koul is a Lead Software Developer with 12+ years of " +
+        "experience building enterprise applications using C#, .NET, " +
+        "WPF, ASP.NET Core, ArcGIS Pro SDK, Kafka, Docker, and Kubernetes.";
+
+    const string siteUrl =
+        "https://ritashkoul.onrender.com";
 
     var canonicalUrl =
-        $"https://ritashkoul.onrender.com{Context.Request.Path}";
+        $"{siteUrl}{Context.Request.Path}";
 }
 
 <!DOCTYPE html>
@@ -77,71 +87,67 @@
     <script src="~/js/theme-init.js"
             asp-append-version="true"></script>
 
-    <script type="application/ld+json"
-            src="~/schema.json"></script>
-
     <link rel="stylesheet"
           href="~/css/site.css"
           asp-append-version="true" />
-
-    <script type="text/javascript">
-        (function (c, l, a, r, i, t, y) {
-            c[a] = c[a] || function () {
-                (c[a].q = c[a].q || []).push(arguments);
-            };
-
-            t = l.createElement(r);
-            t.async = 1;
-            t.src = "https://www.clarity.ms/tag/" + i;
-
-            y = l.getElementsByTagName(r)[0];
-            y.parentNode.insertBefore(t, y);
-        })(window, document, "clarity", "script", "xsvztsvciw");
-    </script>
 </head>
 
 <body>
     <partial name="_Icons" />
 
+    <a class="skip-link"
+       href="#main-content">
+        Skip to main content
+    </a>
+
     <div class="app-window">
-        <header class="tab-bar" role="banner">
-            <a href="/"
+        <header class="tab-bar">
+
+            <a asp-page="/Index"
                class="brand brand-monogram"
                aria-label="Ritash Koul home page">
                 RK
             </a>
 
-            <nav class="tabs" aria-label="Primary navigation">
+            <nav class="tabs"
+                 aria-label="Primary navigation">
 
-                <a class="@TabClass("/")"
-                   href="/"
+                <a asp-page="/Index"
+                   class="@TabClass("/")"
                    aria-current="@(IsActive("/") ? "page" : null)">
-                    <svg class="icon" aria-hidden="true">
+
+                    <svg class="icon"
+                         aria-hidden="true">
                         <use href="#icon-user"></use>
                     </svg>
 
                     <span>About</span>
                 </a>
 
-                <a class="@TabClass("/Experience")"
-                   href="/Experience"
+                <a asp-page="/Experience"
+                   class="@TabClass("/Experience")"
                    aria-current="@(IsActive("/Experience") ? "page" : null)">
-                    <svg class="icon" aria-hidden="true">
+
+                    <svg class="icon"
+                         aria-hidden="true">
                         <use href="#icon-briefcase"></use>
                     </svg>
 
                     <span>Experience</span>
                 </a>
 
-                <a class="@TabClass("/Resume")"
-                   href="/Resume"
+                <a asp-page="/Resume"
+                   class="@TabClass("/Resume")"
                    aria-current="@(IsActive("/Resume") ? "page" : null)">
-                    <svg class="icon" aria-hidden="true">
+
+                    <svg class="icon"
+                         aria-hidden="true">
                         <use href="#icon-file-text"></use>
                     </svg>
 
                     <span>Resume</span>
                 </a>
+
             </nav>
 
             <div class="header-actions">
@@ -151,31 +157,39 @@
                         title="Switch theme"
                         aria-label="Switch between light and dark theme">
 
-                    <svg class="icon icon-sun" aria-hidden="true">
+                    <svg class="icon icon-sun"
+                         aria-hidden="true">
                         <use href="#icon-sun"></use>
                     </svg>
 
-                    <svg class="icon icon-moon" aria-hidden="true">
+                    <svg class="icon icon-moon"
+                         aria-hidden="true">
                         <use href="#icon-moon"></use>
                     </svg>
+
                 </button>
             </div>
+
         </header>
 
-        <main class="content" role="main">
+        <main class="content"
+              id="main-content">
             @RenderBody()
         </main>
 
-        <footer class="status-bar" role="contentinfo">
+        <footer class="status-bar">
             <div class="status-right social-links">
 
                 <a href="https://github.com/ritashkoul"
                    target="_blank"
                    rel="noopener noreferrer"
                    aria-label="GitHub profile">
-                    <svg class="icon icon-sm" aria-hidden="true">
+
+                    <svg class="icon icon-sm"
+                         aria-hidden="true">
                         <use href="#icon-github"></use>
                     </svg>
+
                     GitHub
                 </a>
 
@@ -183,9 +197,12 @@
                    target="_blank"
                    rel="noopener noreferrer"
                    aria-label="LinkedIn profile">
-                    <svg class="icon icon-sm" aria-hidden="true">
+
+                    <svg class="icon icon-sm"
+                         aria-hidden="true">
                         <use href="#icon-linkedin"></use>
                     </svg>
+
                     LinkedIn
                 </a>
 
@@ -193,17 +210,23 @@
                    target="_blank"
                    rel="noopener noreferrer"
                    aria-label="Instagram profile">
-                    <svg class="icon icon-sm" aria-hidden="true">
+
+                    <svg class="icon icon-sm"
+                         aria-hidden="true">
                         <use href="#icon-instagram"></use>
                     </svg>
+
                     Instagram
                 </a>
 
                 <a href="mailto:koulritash@gmail.com"
                    aria-label="Send email">
-                    <svg class="icon icon-sm" aria-hidden="true">
+
+                    <svg class="icon icon-sm"
+                         aria-hidden="true">
                         <use href="#icon-mail"></use>
                     </svg>
+
                     Email
                 </a>
 
@@ -214,6 +237,8 @@
     <script src="~/js/site.js"
             asp-append-version="true"></script>
 
-    @await RenderSectionAsync("Scripts", required: false)
+    @await RenderSectionAsync(
+        "Scripts",
+        required: false)
 </body>
 </html>

@@ -1,19 +1,17 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Portfolio.Models;
 using Portfolio.Services;
 
 namespace Portfolio.Pages;
 
-public class IndexModel(IQuoteService quoteService) : PageModel
+public sealed class IndexModel(IQuoteService quoteService) : PageModel
 {
     private readonly IQuoteService _quoteService = quoteService;
 
-    public string QuoteText { get; private set; } = string.Empty;
+    public Quote? DailyQuote { get; private set; }
 
-    public string QuoteAuthor { get; private set; } = string.Empty;
-
-    public async Task OnGetAsync()
+    public async Task OnGetAsync(CancellationToken cancellationToken)
     {
-        (QuoteText, QuoteAuthor) =
-            await _quoteService.GetDailyQuoteAsync();
+        DailyQuote = await _quoteService.GetDailyQuoteAsync(cancellationToken);
     }
 }

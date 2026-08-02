@@ -1,12 +1,34 @@
 (function () {
+    "use strict";
+
+    const defaultTheme = "dark";
+
     try {
-        var stored = localStorage.getItem('theme');
-        var theme = stored === 'light' || stored === 'dark'
-            ? stored
-            : (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
-        document.documentElement.setAttribute('data-theme', theme);
-    } catch (e) {
-        // localStorage can throw in some privacy modes - fall back to dark, matches the default tokens
-        document.documentElement.setAttribute('data-theme', 'dark');
+        const storedTheme =
+            localStorage.getItem("theme");
+
+        const prefersLightTheme =
+            window.matchMedia &&
+            window.matchMedia(
+                "(prefers-color-scheme: light)"
+            ).matches;
+
+        const theme =
+            storedTheme === "light" ||
+                storedTheme === "dark"
+                ? storedTheme
+                : prefersLightTheme
+                    ? "light"
+                    : defaultTheme;
+
+        document.documentElement.setAttribute(
+            "data-theme",
+            theme
+        );
+    } catch {
+        document.documentElement.setAttribute(
+            "data-theme",
+            defaultTheme
+        );
     }
 })();

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://ritashkoul-dev.onrender.com/sitemap.xml
+Sitemap: https://ritashkoul.onrender.com/sitemap.xml

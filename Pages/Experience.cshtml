@@ -5,35 +5,46 @@
     ViewData["Title"] = "Experience";
 }
 
-<span class="eyebrow">
-    <svg class="icon icon-sm" aria-hidden="true">
-        <use href="#icon-code"></use>
-    </svg>
-    // experience
-</span>
+<header class="page-header">
+    <span class="eyebrow">
+        <svg class="icon icon-sm" aria-hidden="true">
+            <use href="#icon-code"></use>
+        </svg>
+        // experience
+    </span>
 
-<h1>Experience</h1>
+    <h1>Experience</h1>
 
-<p class="lede">
-    10+ years building enterprise desktop, backend, integration, GIS, financial,
-    healthcare, and cloud-native software solutions.
-</p>
+    <p class="lede">
+        10+ years building enterprise desktop, backend, integration, GIS,
+        financial, healthcare, and cloud-native software solutions.
+    </p>
+</header>
+
 <div class="timeline section">
     @foreach (var role in Model.Roles)
     {
-        <article class="timeline-item @(role.IsFeatured ? "timeline-item-featured" : "timeline-item-compact")">
+        var itemClass = role.IsFeatured
+        ? "timeline-item timeline-item-featured"
+        : "timeline-item timeline-item-compact";
+
+        <article class="@itemClass">
             <div class="timeline-marker" aria-hidden="true"></div>
+
             <div class="timeline-body">
-                <div class="timeline-header">
-                    <h2 class="timeline-role">@role.Role</h2>
+                <header class="timeline-header">
+                    <h2 class="timeline-role">
+                        @role.Role
+                    </h2>
 
                     <span class="timeline-duration">
                         <svg class="icon icon-sm" aria-hidden="true">
                             <use href="#icon-calendar"></use>
                         </svg>
+
                         @role.Duration
                     </span>
-                </div>
+                </header>
 
                 <div class="timeline-company">
                     <a href="@role.CompanyUrl"
@@ -46,23 +57,33 @@
                         </svg>
                     </a>
 
-                    <span class="timeline-location">@role.Location</span>
+                    <span class="timeline-location">
+                        @role.Location
+                    </span>
                 </div>
 
-                <div class="timeline-project">@role.ProjectTitle</div>
+                <div class="timeline-project">
+                    @role.ProjectTitle
+                </div>
 
-                <p class="experience-overview">@role.Overview</p>
+                <p class="experience-overview">
+                    @role.ProjectSummary
+                </p>
 
                 @if (role.IsFeatured)
                 {
-                    <div class="timeline-section-label">What I worked on</div>
+                    <section class="timeline-section">
+                        <h3 class="timeline-section-label">
+                            What I worked on
+                        </h3>
 
-                    <ul class="contribution-list">
-                        @foreach (var item in role.KeyContributions)
-                        {
-                            <li>@item</li>
-                        }
-                    </ul>
+                        <ul class="contribution-list">
+                            @foreach (var contribution in role.KeyContributions)
+                            {
+                                <li>@contribution</li>
+                            }
+                        </ul>
+                    </section>
 
                     @foreach (var detail in role.DetailSections)
                     {
@@ -74,7 +95,7 @@
                                 <p>@paragraph</p>
                             }
 
-                            @if (detail.Points.Length > 0)
+                            @if (detail.Points.Count > 0)
                             {
                                 <ul class="experience-detail-list">
                                     @foreach (var point in detail.Points)
@@ -86,44 +107,57 @@
                         </section>
                     }
 
-                    @if (role.Highlights.Length > 0)
+                    @if (role.Highlights.Count > 0)
                     {
-                        <div class="timeline-section-label">Highlights</div>
+                        <section class="timeline-section">
+                            <h3 class="timeline-section-label">
+                                Highlights
+                            </h3>
 
-                        <div class="highlight-grid">
-                            @foreach (var highlight in role.Highlights)
-                            {
-                                <div class="highlight-card">
-                                    <svg class="icon icon-sm" aria-hidden="true">
-                                        <use href="#icon-check-circle"></use>
-                                    </svg>
+                            <div class="highlight-grid">
+                                @foreach (var highlight in role.Highlights)
+                                {
+                                    <div class="highlight-card">
+                                        <svg class="icon icon-sm"
+                                             aria-hidden="true">
+                                            <use href="#icon-check-circle"></use>
+                                        </svg>
 
-                                    <span>@highlight</span>
-                                </div>
-                            }
-                        </div>
+                                        <span>@highlight</span>
+                                    </div>
+                                }
+                            </div>
+                        </section>
                     }
                 }
                 else
                 {
-                    <div class="timeline-section-label">Key contributions</div>
+                    <section class="timeline-section">
+                        <h3 class="timeline-section-label">
+                            Key contributions
+                        </h3>
 
-                    <ul class="contribution-list compact-contribution-list">
-                        @foreach (var item in role.KeyContributions)
-                        {
-                            <li>@item</li>
-                        }
-                    </ul>
+                        <ul class="contribution-list compact-contribution-list">
+                            @foreach (var contribution in role.KeyContributions)
+                            {
+                                <li>@contribution</li>
+                            }
+                        </ul>
+                    </section>
                 }
 
-                <div class="timeline-section-label">Tech stack</div>
+                <section class="timeline-section">
+                    <h3 class="timeline-section-label">
+                        Tech stack
+                    </h3>
 
-                <div class="tag-row">
-                    @foreach (var tech in role.Tech)
-                    {
-                        <span class="tag">@tech</span>
-                    }
-                </div>
+                    <div class="tag-row">
+                        @foreach (var technology in role.Technologies)
+                        {
+                            <span class="tag">@technology</span>
+                        }
+                    </div>
+                </section>
             </div>
         </article>
     }
@@ -141,10 +175,10 @@
 
         <h2>Side projects</h2>
 
-         <div class="card-grid">
+        <div class="card-grid">
             @foreach (var project in Model.SideProjects)
             {
-                <div class="card">
+                <article class="card">
                     <div class="file-name">
                         <svg class="icon icon-sm" aria-hidden="true">
                             <use href="#icon-code"></use>
@@ -172,36 +206,17 @@
                                rel="noopener noreferrer">
                                 View on GitHub
 
-                                <svg class="icon icon-sm" aria-hidden="true">
+                                <svg class="icon icon-sm"
+                                     aria-hidden="true">
                                     <use href="#icon-external"></use>
                                 </svg>
                             </a>
                         </div>
                     }
-                </div>
+                </article>
             }
         </div>
     </section>
 }
 
-<div class="scroll-controls" aria-label="Page navigation">
-    <button type="button"
-            id="scroll-top"
-            class="scroll-control"
-            title="Back to top"
-            aria-label="Back to top">
-        <svg class="icon" aria-hidden="true">
-            <use href="#icon-chevron-up"></use>
-        </svg>
-    </button>
-
-    <button type="button"
-            id="scroll-bottom"
-            class="scroll-control"
-            title="Go to bottom"
-            aria-label="Go to bottom">
-        <svg class="icon" aria-hidden="true">
-            <use href="#icon-chevron-down"></use>
-        </svg>
-    </button>
-</div>
+<partial name="_ScrollControls" />

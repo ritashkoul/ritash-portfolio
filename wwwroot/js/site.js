@@ -1,185 +1,146 @@
-// Keep all JS in this file and referenced via <script src="...">. Never add
-// inline <script> or onclick="" attributes - the Content-Security-Policy in
-// Program.cs (script-src 'self') blocks them, which is intentional: it makes
-// inline-script-injection XSS impossible.
-
 (function () {
     "use strict";
+
+    const themeToggle =
+        document.getElementById("theme-toggle");
+
+    const scrollTopButton =
+        document.getElementById("scroll-top");
+
+    const scrollBottomButton =
+        document.getElementById("scroll-bottom");
+
+    const themeColors = {
+        dark: "#171b20",
+        light: "#e9e6dd"
+    };
+
 
     /* ============================================================
        Theme
        ============================================================ */
 
-    var themeToggle = document.getElementById("theme-toggle");
-
-    var THEME_COLORS = {
-        dark: "#171b20",
-        light: "#e9e6dd"
-    };
-
     function getCurrentTheme() {
-        return document.documentElement.getAttribute("data-theme") === "light"
+        return document.documentElement
+            .getAttribute("data-theme") === "light"
             ? "light"
             : "dark";
     }
 
-    function syncMetaThemeColor(theme) {
-        var meta = document.getElementById("theme-color-meta");
+    function updateThemeColor(theme) {
+        const meta =
+            document.getElementById(
+                "theme-color-meta"
+            );
 
         if (meta) {
             meta.setAttribute(
                 "content",
-                THEME_COLORS[theme] || THEME_COLORS.dark
+                themeColors[theme]
             );
         }
     }
 
-    syncMetaThemeColor(getCurrentTheme());
+    function setTheme(theme) {
+        document.documentElement.setAttribute(
+            "data-theme",
+            theme
+        );
 
-    if (themeToggle) {
-        themeToggle.addEventListener("click", function () {
-            var current = getCurrentTheme();
-            var next = current === "light" ? "dark" : "light";
+        updateThemeColor(theme);
 
-            document.documentElement.setAttribute(
-                "data-theme",
-                next
+        try {
+            localStorage.setItem(
+                "theme",
+                theme
             );
-
-            syncMetaThemeColor(next);
-
-            try {
-                localStorage.setItem("theme", next);
-            } catch (e) {
-                // Theme still works for the current browser session.
-            }
-        });
+        } catch {
+            // Theme remains active for the current session.
+        }
     }
+
+    function toggleTheme() {
+        const nextTheme =
+            getCurrentTheme() === "light"
+                ? "dark"
+                : "light";
+
+        setTheme(nextTheme);
+    }
+
+    updateThemeColor(
+        getCurrentTheme()
+    );
+
+    themeToggle?.addEventListener(
+        "click",
+        toggleTheme
+    );
 
 
     /* ============================================================
-       Experience page scroll controls
+       Scroll controls
        ============================================================ */
 
-    var scrollTopButton =
-        document.getElementById("scroll-top");
-
-    var scrollBottomButton =
-        document.getElementById("scroll-bottom");
-
-
-    /*
-       Other pages don't contain these controls.
-       Stop here after initializing the theme.
-    */
     if (!scrollTopButton && !scrollBottomButton) {
         return;
     }
 
-
-    function getScrollTop() {
-        return (
-            window.pageYOffset ||
-            document.documentElement.scrollTop ||
-            document.body.scrollTop ||
-            0
-        );
-    }
-
-
     function getDocumentHeight() {
         return Math.max(
             document.documentElement.scrollHeight,
-            document.body.scrollHeight,
-            document.documentElement.offsetHeight,
-            document.body.offsetHeight,
-            document.documentElement.clientHeight
+            document.body.scrollHeight
         );
     }
 
-
     function updateScrollControls() {
-        var scrollTop = getScrollTop();
+        const scrollTop =
+            window.scrollY ||
+            document.documentElement.scrollTop;
 
-        var viewportHeight =
-            window.innerHeight ||
-            document.documentElement.clientHeight;
+        const viewportHeight =
+            window.innerHeight;
 
-        var documentHeight =
+        const documentHeight =
             getDocumentHeight();
 
-
-        /*
-           Hide UP when close to the top.
-        */
-        var nearTop =
+        const nearTop =
             scrollTop <= 120;
 
-
-        /*
-           Hide DOWN when close to the bottom.
-        */
-        var nearBottom =
+        const nearBottom =
             scrollTop + viewportHeight >=
             documentHeight - 120;
 
+        scrollTopButton?.classList.toggle(
+            "is-hidden",
+            nearTop
+        );
 
-        if (scrollTopButton) {
-            scrollTopButton.classList.toggle(
-                "is-hidden",
-                nearTop
-            );
-        }
-
-
-        if (scrollBottomButton) {
-            scrollBottomButton.classList.toggle(
-                "is-hidden",
-                nearBottom
-            );
-        }
-    }
-
-
-    /* ============================================================
-       Scroll to top
-       ============================================================ */
-
-    if (scrollTopButton) {
-        scrollTopButton.addEventListener(
-            "click",
-            function () {
-                window.scrollTo({
-                    top: 0,
-                    left: 0,
-                    behavior: "smooth"
-                });
-            }
+        scrollBottomButton?.classList.toggle(
+            "is-hidden",
+            nearBottom
         );
     }
 
+    scrollTopButton?.addEventListener(
+        "click",
+        function () {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        }
+    );
 
-    /* ============================================================
-       Scroll to bottom
-       ============================================================ */
-
-    if (scrollBottomButton) {
-        scrollBottomButton.addEventListener(
-            "click",
-            function () {
-                window.scrollTo({
-                    top: getDocumentHeight(),
-                    left: 0,
-                    behavior: "smooth"
-                });
-            }
-        );
-    }
-
-
-    /* ============================================================
-       Keep button visibility in sync
-       ============================================================ */
+    scrollBottomButton?.addEventListener(
+        "click",
+        function () {
+            window.scrollTo({
+                top: getDocumentHeight(),
+                behavior: "smooth"
+            });
+        }
+    );
 
     window.addEventListener(
         "scroll",
@@ -189,17 +150,10 @@
         }
     );
 
-
     window.addEventListener(
         "resize",
         updateScrollControls
     );
 
-
-    /*
-       Set the correct state as soon as
-       the Experience page loads.
-    */
     updateScrollControls();
-
 })();

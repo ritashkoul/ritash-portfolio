@@ -1,48 +1,51 @@
-# Portfolio — ASP.NET Core
+# Ritash Koul — Portfolio
 
-My portfolio: About, Experience, and a viewable +
-downloadable resume. No database, no login, no user input anywhere — the
-simplest architecture that still looks and feels like a real, professional
-site..
+Personal portfolio website built with ASP.NET Core Razor Pages.
 
-## What's on the site
+The site presents my professional experience, technical background, current
+engineering work, personal projects, and resume.
 
-- **About** (`/`) — bio, skills, education, resume link, LinkedIn/Instagram/Email
-- **Experience** (`/Experience`) — a timeline of roles pulled from the resume,
-  each with the project worked on, a plain-language description, tech tags,
-  and a link to the company's public website
-- **Resume** (`/Resume`) — the resume PDF viewable inline (via `<iframe>`,
-  same-origin, no `object-src` exception needed) plus a direct download button
+## Live site
 
-## Opening in Visual Studio
+https://ritashkoul.onrender.com
 
-You'll need [Visual Studio 2022](https://visualstudio.microsoft.com/) (Community edition is free) with the **ASP.NET and web development** workload, or just the [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0) if you prefer the command line.
+## Features
 
-Double-click **`Portfolio.sln`** to open the project. Press F5 to run locally.
+- Professional profile and technical background
+- Work experience timeline
+- Current engineering work
+- Personal projects
+- Online resume preview and PDF download
+- Responsive desktop and mobile layout
+- Light and dark themes
+- Accessible keyboard navigation
 
-```bash
-dotnet restore
-dotnet run
-```
+## Technology
 
-Then open the URL shown in the console, e.g. `https://localhost:5001`.
+- ASP.NET Core 8
+- Razor Pages
+- C#
+- HTML5
+- CSS
+- JavaScript
+- Docker
 
-> Note: this environment doesn't have the .NET SDK installed, so these files
-> haven't been compiled here — build locally before you deploy to catch any
-> typos.
+The application intentionally uses a lightweight architecture. It does not
+require a database, authentication, or client-side framework.
 
-## Deploying for free
+## Project structure
 
-There's no database here, so deployment is as simple as it gets — just the
-compiled app, nothing to persist between deploys.
-
-**Recommended: Azure App Service (Free F1 tier)** — native ASP.NET Core
-support (no Docker required), a clean URL like `yourname.azurewebsites.net`.
-
-Create a free Azure account (no charge on the F1 tier — a payment method
-is required for identity verification, but you won't be billed as long
-as you stay on F1 and add no paid resources).
-
-**Alternative: Render.com** — uses the included `Dockerfile`, doesn't require
-a card, auto-deploys on push. Since there's no database to worry about
-persisting, Render's filesystem isn't a concern here.
+```text
+Portfolio/
+├── Data/
+├── Extensions/
+├── Models/
+├── Pages/
+├── Services/
+├── wwwroot/
+│   ├── css/
+│   ├── js/
+│   └── resume/
+├── Dockerfile
+├── Portfolio.csproj
+└── Program.cs

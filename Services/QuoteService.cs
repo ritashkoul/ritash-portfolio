@@ -1,97 +1,88 @@
 ﻿using System.Text.Json;
 using Microsoft.Extensions.Caching.Memory;
+using Portfolio.Models;
 
 namespace Portfolio.Services;
 
 public sealed class QuoteService(
     IHttpClientFactory httpClientFactory,
     IMemoryCache cache,
-    ILogger<QuoteService> logger) : IQuoteService
+    ILogger<QuoteService> logger)
+    : IQuoteService
 {
-    private static readonly (string Text, string Author) Fallback =
-        (
+    private const string HttpClientName = "ZenQuotes";
+
+    private static readonly Quote FallbackQuote =
+        new(
             "The only way to do great work is to love what you do.",
-            "Steve Jobs"
-        );
+            "Steve Jobs");
 
-    private readonly IHttpClientFactory _httpClientFactory =
-        httpClientFactory;
+    private readonly IHttpClientFactory _httpClientFactory = httpClientFactory;
 
-    private readonly IMemoryCache _cache =
-        cache;
+    private readonly IMemoryCache _cache = cache;
 
-    private readonly ILogger<QuoteService> _logger =
-        logger;
+    private readonly ILogger<QuoteService> _logger = logger;
 
-    public async Task<(string Text, string Author)> GetDailyQuoteAsync()
+    public async Task<Quote> GetDailyQuoteAsync(CancellationToken cancellationToken = default)
     {
-        var cacheKey =
-            $"daily-quote-{DateTime.UtcNow:yyyy-MM-dd}";
+        var cacheKey = $"daily-quote-{DateTime.UtcNow:yyyy-MM-dd}";
 
-        if (_cache.TryGetValue(
-            cacheKey,
-            out (string Text, string Author) cachedQuote))
-        {
-            return cachedQuote;
-        }
+        if (_cache.TryGetValue(cacheKey, out Quote? cachedQuote))
+            return cachedQuote!;
 
-        var quote = await FetchQuoteAsync();
-
-        var cacheDuration = quote == Fallback
-            ? TimeSpan.FromMinutes(30)
-            : TimeSpan.FromHours(24);
-
-        _cache.Set(cacheKey, quote, cacheDuration);
+        var quote = await FetchQuoteAsync(cancellationToken);
+        _cache.Set(cacheKey, quote, TimeSpan.FromHours(24));
 
         return quote;
     }
 
-    private async Task<(string Text, string Author)> FetchQuoteAsync()
+    private async Task<Quote> FetchQuoteAsync(CancellationToken cancellationToken)
     {
         try
         {
-            var client =
-                _httpClientFactory.CreateClient("ZenQuotes");
+            var client = _httpClientFactory.CreateClient(HttpClientName);
 
-            using var cancellationTokenSource =
-                new CancellationTokenSource(TimeSpan.FromSeconds(4));
-
-            using var response = await client.GetAsync(
-                "https://zenquotes.io/api/today",
-                cancellationTokenSource.Token);
+            using var response = await client.GetAsync("api/today", cancellationToken);
 
             response.EnsureSuccessStatusCode();
 
-            await using var stream =
-                await response.Content.ReadAsStreamAsync(
-                    cancellationTokenSource.Token);
+            await using var stream = await response.Content.ReadAsStreamAsync(cancellationToken);
 
             using var document =
                 await JsonDocument.ParseAsync(
                     stream,
-                    cancellationToken: cancellationTokenSource.Token);
+                    cancellationToken: cancellationToken);
 
-            var firstQuote =
-                document.RootElement[0];
+            var firstQuote = document.RootElement[0];
+            var text = firstQuote.GetProperty("q").GetString();
+            var author = firstQuote.GetProperty("a").GetString();
 
-            var text =
-                firstQuote.GetProperty("q").GetString();
+            if (string.IsNullOrWhiteSpace(text) ||
+                string.IsNullOrWhiteSpace(author))
+            {
+                return FallbackQuote;
+            }
 
-            var author =
-                firstQuote.GetProperty("a").GetString();
-
-            return string.IsNullOrWhiteSpace(text)
-                   || string.IsNullOrWhiteSpace(author)
-                ? Fallback
-                : (text, author);
+            return new Quote(text, author);
         }
-        catch (Exception exception)
+        catch (OperationCanceledException)
+            when (!cancellationToken.IsCancellationRequested)
         {
-            _logger.LogWarning(
-                exception,
-                "Could not fetch the daily quote from ZenQuotes.");
+            _logger.LogWarning("ZenQuotes request timed out.");
 
-            return Fallback;
+            return FallbackQuote;
+        }
+        catch (HttpRequestException ex)
+        {
+            _logger.LogWarning(ex, "ZenQuotes request failed.");
+
+            return FallbackQuote;
+        }
+        catch (JsonException ex)
+        {
+            _logger.LogWarning(ex, "ZenQuotes returned an invalid response.");
+
+            return FallbackQuote;
         }
     }
 }

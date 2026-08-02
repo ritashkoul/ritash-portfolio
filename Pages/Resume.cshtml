@@ -5,25 +5,25 @@
     ViewData["Title"] = "Resume";
 }
 
-<span class="eyebrow">
-    <svg class="icon icon-sm" aria-hidden="true">
-        <use href="#icon-download"></use>
-    </svg>
-    // resume.pdf
-</span>
+<header class="page-header">
+    <span class="eyebrow">
+        <svg class="icon icon-sm" aria-hidden="true">
+            <use href="#icon-file-text"></use>
+        </svg>
+        // resume
+    </span>
 
-<h1>Resume</h1>
+    <h1>Resume</h1>
 
-<p class="lede">
-    A concise overview of my professional experience, technical skills,
-    product work, and education.
-</p>
+    <p class="lede">
+        View the resume online or download the PDF directly.
+    </p>
+</header>
 
 <div class="resume-actions">
     <a class="btn btn-primary"
        href="~/resume/resume.pdf"
        download>
-
         <svg class="icon" aria-hidden="true">
             <use href="#icon-download"></use>
         </svg>
@@ -35,50 +35,20 @@
        href="~/resume/resume.pdf"
        target="_blank"
        rel="noopener noreferrer">
-
         Open in new tab
 
         <svg class="icon" aria-hidden="true">
             <use href="#icon-external"></use>
         </svg>
     </a>
-
-    <a class="btn"
-       href="/Experience">
-
-        Read detailed experience
-
-        <svg class="icon" aria-hidden="true">
-            <use href="#icon-arrow-right"></use>
-        </svg>
-    </a>
 </div>
 
-<div class="resume-frame section">
+<section class="resume-frame section"
+         aria-label="Resume preview">
     <iframe src="/resume/resume.pdf"
-            title="Ritash Koul resume preview"
+            title="Ritash Koul resume"
             loading="lazy">
     </iframe>
-</div>
+</section>
 
-<div class="scroll-controls" aria-label="Page navigation">
-    <button type="button"
-            id="scroll-top"
-            class="scroll-control"
-            title="Back to top"
-            aria-label="Back to top">
-        <svg class="icon" aria-hidden="true">
-            <use href="#icon-chevron-up"></use>
-        </svg>
-    </button>
-
-    <button type="button"
-            id="scroll-bottom"
-            class="scroll-control"
-            title="Go to bottom"
-            aria-label="Go to bottom">
-        <svg class="icon" aria-hidden="true">
-            <use href="#icon-chevron-down"></use>
-        </svg>
-    </button>
-</div>
+<partial name="_ScrollControls" />
