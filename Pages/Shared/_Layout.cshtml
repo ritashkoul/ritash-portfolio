@@ -106,55 +106,48 @@
     <div class="app-window">
         <header class="tab-bar" role="banner">
             <a href="/"
-               class="brand"
+               class="brand brand-monogram"
                aria-label="Ritash Koul home page">
-
-                <svg class="icon" aria-hidden="true">
-                    <use href="#icon-code"></use>
-                </svg>
+                RK
             </a>
 
-            <nav class="tabs"
-                 aria-label="Primary navigation">
+            <nav class="tabs" aria-label="Primary navigation">
 
                 <a class="@TabClass("/")"
                    href="/"
                    aria-current="@(IsActive("/") ? "page" : null)">
-
                     <svg class="icon" aria-hidden="true">
-                        <use href="#icon-eye"></use>
+                        <use href="#icon-user"></use>
                     </svg>
 
-                    <span>About.cshtml</span>
+                    <span>About</span>
                 </a>
 
                 <a class="@TabClass("/Experience")"
                    href="/Experience"
                    aria-current="@(IsActive("/Experience") ? "page" : null)">
-
                     <svg class="icon" aria-hidden="true">
-                        <use href="#icon-code"></use>
+                        <use href="#icon-briefcase"></use>
                     </svg>
 
-                    <span>Experience.cshtml</span>
+                    <span>Experience</span>
                 </a>
 
                 <a class="@TabClass("/Resume")"
                    href="/Resume"
                    aria-current="@(IsActive("/Resume") ? "page" : null)">
-
                     <svg class="icon" aria-hidden="true">
-                        <use href="#icon-download"></use>
+                        <use href="#icon-file-text"></use>
                     </svg>
 
-                    <span>Resume.pdf</span>
+                    <span>Resume</span>
                 </a>
             </nav>
 
             <div class="header-actions">
                 <button type="button"
                         id="theme-toggle"
-                        class="btn-icon theme-toggle"
+                        class="theme-toggle"
                         title="Switch theme"
                         aria-label="Switch between light and dark theme">
 
@@ -166,17 +159,6 @@
                         <use href="#icon-moon"></use>
                     </svg>
                 </button>
-
-                <a class="btn-icon"
-                   href="~/resume/resume.pdf"
-                   download
-                   title="Download resume"
-                   aria-label="Download resume as PDF">
-
-                    <svg class="icon" aria-hidden="true">
-                        <use href="#icon-download"></use>
-                    </svg>
-                </a>
             </div>
         </header>
 
@@ -186,35 +168,45 @@
 
         <footer class="status-bar" role="contentinfo">
             <div class="status-right social-links">
+
                 <a href="https://github.com/ritashkoul"
                    target="_blank"
-                   rel="noopener noreferrer">
-
+                   rel="noopener noreferrer"
+                   aria-label="GitHub profile">
                     <svg class="icon icon-sm" aria-hidden="true">
                         <use href="#icon-github"></use>
                     </svg>
-
                     GitHub
                 </a>
 
                 <a href="https://www.linkedin.com/in/ritash-koul-a7ab9050"
                    target="_blank"
-                   rel="noopener noreferrer">
-
+                   rel="noopener noreferrer"
+                   aria-label="LinkedIn profile">
                     <svg class="icon icon-sm" aria-hidden="true">
                         <use href="#icon-linkedin"></use>
                     </svg>
-
                     LinkedIn
                 </a>
 
-                <a href="mailto:koulritash@gmail.com">
+                <a href="https://www.instagram.com/koulheadedritesh/"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   aria-label="Instagram profile">
+                    <svg class="icon icon-sm" aria-hidden="true">
+                        <use href="#icon-instagram"></use>
+                    </svg>
+                    Instagram
+                </a>
+
+                <a href="mailto:koulritash@gmail.com"
+                   aria-label="Send email">
                     <svg class="icon icon-sm" aria-hidden="true">
                         <use href="#icon-mail"></use>
                     </svg>
-
                     Email
                 </a>
+
             </div>
         </footer>
     </div>

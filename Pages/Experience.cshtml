@@ -18,20 +18,11 @@
     10+ years building enterprise desktop, backend, integration, GIS, financial,
     healthcare, and cloud-native software solutions.
 </p>
-
-<div class="experience-intro">
-    <p>
-        My experience spans enterprise product development across GIS, financial services,
-        healthcare, insurance, and utilities.
-    </p>
-</div>
-
 <div class="timeline section">
     @foreach (var role in Model.Roles)
     {
         <article class="timeline-item @(role.IsFeatured ? "timeline-item-featured" : "timeline-item-compact")">
             <div class="timeline-marker" aria-hidden="true"></div>
-
             <div class="timeline-body">
                 <div class="timeline-header">
                     <h2 class="timeline-role">@role.Role</h2>
@@ -192,3 +183,25 @@
         </div>
     </section>
 }
+
+<div class="scroll-controls" aria-label="Page navigation">
+    <button type="button"
+            id="scroll-top"
+            class="scroll-control"
+            title="Back to top"
+            aria-label="Back to top">
+        <svg class="icon" aria-hidden="true">
+            <use href="#icon-chevron-up"></use>
+        </svg>
+    </button>
+
+    <button type="button"
+            id="scroll-bottom"
+            class="scroll-control"
+            title="Go to bottom"
+            aria-label="Go to bottom">
+        <svg class="icon" aria-hidden="true">
+            <use href="#icon-chevron-down"></use>
+        </svg>
+    </button>
+</div>

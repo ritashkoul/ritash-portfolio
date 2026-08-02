@@ -30,7 +30,7 @@ public class ExperienceModel : PageModel
             DetailSections:
             [
                 new(
-                    Title: "Rebuilding mature GIS products",
+                    Title: "Rebuilding GIS products",
                     Paragraphs:
                     [
                         "This is not a direct code migration. ArcMap and ArcGIS Pro use substantially different SDKs, so existing workflows must often be redesigned rather than simply ported.",

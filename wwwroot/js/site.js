@@ -30,4 +30,61 @@
             // Preference just won't persist across visits (e.g. private browsing) - not fatal
         }
     });
+
+    var scrollTopButton = document.getElementById('scroll-top');
+    var scrollBottomButton = document.getElementById('scroll-bottom');
+
+    function updateScrollControls() {
+        if (!scrollTopButton && !scrollBottomButton) {
+            return;
+        }
+
+        var scrollTop = window.scrollY || document.documentElement.scrollTop;
+        var viewportHeight = window.innerHeight;
+        var documentHeight = document.documentElement.scrollHeight;
+
+        var nearTop = scrollTop < 120;
+        var nearBottom = scrollTop + viewportHeight >= documentHeight - 120;
+
+        if (scrollTopButton) {
+            scrollTopButton.classList.toggle('is-hidden', nearTop);
+        }
+
+        if (scrollBottomButton) {
+            scrollBottomButton.classList.toggle('is-hidden', nearBottom);
+        }
+    }
+
+    if (scrollTopButton) {
+        scrollTopButton.addEventListener('click', function () {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
+
+    if (scrollBottomButton) {
+        scrollBottomButton.addEventListener('click', function () {
+            window.scrollTo({
+                top: document.documentElement.scrollHeight,
+                behavior: 'smooth'
+            });
+        });
+    }
+
+    if (scrollTopButton || scrollBottomButton) {
+        updateScrollControls();
+
+        window.addEventListener(
+            'scroll',
+            updateScrollControls,
+            { passive: true }
+        );
+
+        window.addEventListener(
+            'resize',
+            updateScrollControls
+        );
+    }
 })();
