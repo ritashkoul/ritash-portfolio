@@ -63,6 +63,8 @@ app.UseStaticFiles(new StaticFileOptions
 
 app.UseRouting();
 
+app.MapGet("/health", () => Results.Ok("Healthy"));
+
 app.MapRazorPages();
 
 app.Run();
